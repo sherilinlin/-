@@ -53,12 +53,33 @@
       font-size: 16px;
       cursor: pointer;
       margin-top: 10px;
+      transition: background 0.2s, transform 0.1s, opacity 0.2s;
+    }
+
+    .btn:hover:not(:disabled) {
+      background: #e6336e;
+      transform: translateY(-1px);
+    }
+
+    .btn:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn:focus-visible {
+      outline: 3px solid #b5005b;
+      outline-offset: 3px;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: default;
     }
 
     .small {
       opacity: .75;
       font-size: 13px;
       margin-top: 12px;
+      transition: opacity 0.3s;
     }
 
     .hr {
@@ -84,7 +105,7 @@
     <div class="card" id="card">
       <h1 id="title">男生情人節快樂 💗</h1>
 
-      <div id="content">
+      <div id="content" style="transition: opacity 0.3s;">
         <p class="p">有一個小禮物要給你～</p>
       </div>
 
@@ -105,7 +126,9 @@
       step++;
 
       if (step === 1) {
-        content.innerHTML = `
+        content.style.opacity = "0";
+        setTimeout(() => {
+          content.innerHTML = `
           <p class="p">請根據下列資訊領取你的情人節禮物 🎁</p>
           <hr class="hr">
 
@@ -115,6 +138,8 @@
           <hr class="hr">
           <p class="p">希望男生新年很開心 🧧✨</p>
         `;
+          content.style.opacity = "1";
+        }, 300);
 
         btn.textContent = "嘿嘿";
         hint.textContent = "情人節快樂～";
